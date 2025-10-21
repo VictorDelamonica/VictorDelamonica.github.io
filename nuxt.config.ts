@@ -12,6 +12,7 @@ export default defineNuxtConfig({
         preset: 'github_pages',
     },
     ssr: false,
+    css: ['~/assets/css/fonts.css'],
     app: {
         baseURL: '/',
         head: {
