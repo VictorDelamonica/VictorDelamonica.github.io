@@ -1,0 +1,1 @@
+import e from"./BX5ThzO6.js";import{x as t,B as r,z as s,y as o}from"#entry";const n={class:"bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans"},m={__name:"index",setup(i){return(c,a)=>(o(),t("main",n,[r(e),a[0]||(a[0]=s("div",{class:"opacity-0 animate-fade-in-down"},null,-1))]))}};export{m as default};
