@@ -1,58 +1,36 @@
-name: Deploy to GitHub Pages
+name: Deploy Nuxt to GitHub Pages
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+      - master  # or main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v5
 
-      - name: Setup Node
+      - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: 18
           cache: 'npm'
+          cache-dependency-path: ./package-lock.json
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Install dependencies
-        run: npm ci
-
-
-      - name: Generate static site
+      - name: Build Project
         run: npm run generate
-        env:
-          NODE_ENV: production
-          NITRO_PRESET: github_pages
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: .output/public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./.output/public
