@@ -8,4 +8,7 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// Dynamic favicon based on color mode
+useFavicon()
+</script>
