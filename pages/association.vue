@@ -6,6 +6,8 @@
       <Desk/>
       <Missions/>
       <Adhesion/>
+      <Helper/>
+      <Dons/>
     </div>
   </main>
 </template>
@@ -16,4 +18,6 @@ import History from "~/pages/association/history.vue";
 import Default from "~/layouts/default.vue";
 import Missions from "~/pages/association/missions.vue";
 import Adhesion from "~/pages/association/adhesion.vue";
+import Helper from "~/pages/association/helper.vue";
+import Dons from "~/pages/association/dons.vue";
 </script>
