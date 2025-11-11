@@ -5,8 +5,8 @@
     subtitle="12 millions de personnes en France vivent aujourd'hui avec un handicap, dont 80 % sont invisibles."
     subtitle-style="normal"
     :show-c-t-a="true"
-    cta-text="En apprendre plus (bientôt)"
-    cta-link="#"
+    cta-text="En apprendre plus"
+    cta-link="/association"
   >
     <p>
       Derrière ce chiffre, il y a des <strong>patients</strong>,

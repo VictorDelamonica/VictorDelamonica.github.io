@@ -15,9 +15,18 @@
 
     <p>
       Face à ce constat, L’Alternative est né. Ce programme, porté par IncluSens
-      <strong>délai d’attente moyen de plusieurs mois </strong>
-      pour accéder à une consultation spécialisée. Ce
-      <strong>vide dans la prise en charge entraîne isolement, anxiété et parfois désinsertion </strong>professionnelle.
+      <strong> en partenariat avec le Centre Hospitalier Alpes Léman et soutenu par l’Agence Régionale de Santé, </strong>
+      propose un accompagnement précoce et innovant entre la ville et l’hôpital.
+    </p>
+
+    <p>
+      Son objectif est
+      <strong> d’offrir aux personnes douloureuses chroniques un soutien concret </strong>
+      avant leur première consultation spécialisée, grâce à une
+      <strong> approche psycho-corporelle et sociale</strong>.
+      En favorisant le lien entre patients, aidants et professionnels, L’Alternative contribue à
+      <strong> améliorer la qualité de vie, à réduire l’isolement et à renforcer la continuité des parcours de soins.</strong>
+
     </p>
   </PageTemplate>
 </template>

@@ -7,15 +7,18 @@
       <Tables/>
       <Circle/>
       <Alternative/>
+      <Application/>
     </div>
   </main>
 </template>
 
 <script setup>
 import Default from "~/layouts/default.vue";
-import Hero from "~/pages/hero.vue";
-import Exposition from "~/pages/exposition.vue";
-import Tables from "~/pages/tables.vue";
-import Circle from "~/pages/circle.vue";
-import Alternative from "~/pages/alternative.vue";
+import Hero from "~/pages/general/hero.vue";
+import Exposition from "~/pages/general/exposition.vue";
+import Tables from "~/pages/general/tables.vue";
+import Circle from "~/pages/general/circle.vue";
+import Alternative from "~/pages/general/alternative.vue";
+import Application from "~/pages/general/application.vue";
+import Association from "~/pages/association.vue";
 </script>

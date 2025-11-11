@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     components: true,
     compatibilityDate: '2025-04-14',
     devtools: { enabled: true },
-    modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
+    modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@nuxtjs/mdc'],
     colorMode: {
         classSuffix: '',
         preference: 'system', // default
@@ -19,7 +19,7 @@ export default defineNuxtConfig({
             link: [
                 {
                     rel: 'stylesheet',
-                    href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap',
+                    href: 'https://fonts.google.com/specimen/Inclusive+Sans',
                 },
                 {
                     rel: 'icon',

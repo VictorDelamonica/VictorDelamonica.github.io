@@ -2,18 +2,36 @@
   <main class="min-h-screen bg-[#F7EDEA] dark:bg-gray-900 text-gray-700 dark:text-gray-300 font-sans transition-colors duration-300">
     <section class="mx-auto w-full max-w-5xl px-6 pt-10 pb-20 md:pt-14">
 
+      <!-- Back Button (optional) -->
+      <div v-if="showBackButton" class="mb-6">
+        <NuxtLink
+          :to="backLink"
+          class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 group"
+        >
+          <svg
+            class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          <span class="font-medium">{{ backText }}</span>
+        </NuxtLink>
+      </div>
+
       <!-- Title -->
       <h1 :class="titleClass" class="text-center mb-2 select-none">
         {{ title }}
       </h1>
 
       <!-- Subtitle (optional) -->
-      <p v-if="subtitle" :class="subtitleClass" class="mx-auto max-w-3xl text-center mb-10 md:mb-14">
+      <h2 v-if="subtitle" :class="subtitleClass" class="mx-auto max-wh2xl text-center mb-10 md:mb-14">
         {{ subtitle }}
-      </p>
+      </h2>
 
       <!-- Content slot for custom HTML with rich formatting -->
-      <div class="mx-auto mt-10 md:mt-14 max-w-3xl text-[18px] leading-8 tracking-wide">
+      <div class="mx-auto mt-10 md:mt-14 max-wh2xl text-[18px] leading-8 tracking-wide">
         <slot />
       </div>
 
@@ -61,6 +79,24 @@ const props = defineProps({
     validator: (value) => ['handwritten', 'normal', 'custom'].includes(value)
   },
 
+  // Show back button
+  showBackButton: {
+    type: Boolean,
+    default: false
+  },
+
+  // Back button text
+  backText: {
+    type: String,
+    default: 'Retour'
+  },
+
+  // Back button link
+  backLink: {
+    type: String,
+    default: '/'
+  },
+
   // Show CTA button
   showCTA: {
     type: Boolean,
@@ -104,42 +140,41 @@ const subtitleClass = computed(() => {
 <style scoped>
 /* Handwritten title with Lazydog font and shadow */
 .title-handwritten {
-  font-family: 'Lazydog', cursive;
+  font-family: 'Inclusive Sans', cursive;
   color: #F4A694;
   font-weight: bold;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
+:global(.dark) .title-handwritten {
+  font-family: 'Inclusive Sans', cursive;
+  color: #F4A694;
+}
+
 
 /* Bold title with Garet Heavy */
 .title-bold {
-  font-family: 'Garet', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font-family: 'Inclusive Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   font-weight: 900;
   color: #F4A694;
-  //text-shadow: 8px 8px 0 rgba(128, 128, 128, 0.4);
   letter-spacing: 0.05em;
-}
-
-:global(.dark) .title-bold {
-  //text-shadow: 8px 8px 0 rgba(100, 100, 100, 0.5);
 }
 
 /* Handwritten subtitle with Lazydog font */
 .subtitle-handwritten {
-  font-family: 'Lazydog', cursive;
+  font-family: 'Inclusive Sans', cursive;
   color: #8B7B8B;
-  text-shadow: 6px 6px 0 rgba(244, 166, 148, 0.3);
+  text-shadow: 3px 3px 0 rgba(244, 166, 148, 0.3);
 }
 
 :global(.dark) .subtitle-handwritten {
   color: #B8A8B8;
-  //text-shadow: 6px 6px 0 rgba(244, 166, 148, 0.25);
 }
 
 /* Typography refinements */
 main {
   line-height: 1.75;
-  font-family: 'Garet', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: 'Inclusive Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 /* Style for content paragraphs */
@@ -148,8 +183,7 @@ main {
 }
 
 :slotted(strong) {
-  font-weight: 600;
-  color: #374151;
+  font-weight: 900;
 }
 
 :global(.dark) :slotted(strong) {
