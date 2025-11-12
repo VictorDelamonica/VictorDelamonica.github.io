@@ -3,22 +3,24 @@
     <section class="mx-auto w-full max-w-5xl px-6 pt-10 pb-20 md:pt-14">
 
       <!-- Back Button (optional) -->
-      <div v-if="showBackButton" class="mb-6">
+      <nav v-if="showBackButton" class="mb-6" aria-label="Breadcrumb">
         <NuxtLink
           :to="backLink"
           class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 group"
+          :aria-label="`${backText} vers la page précédente`"
         >
           <svg
             class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
           <span class="font-medium">{{ backText }}</span>
         </NuxtLink>
-      </div>
+      </nav>
 
       <!-- Title -->
       <h1 :class="titleClass" class="text-center mb-2 select-none">
@@ -26,12 +28,12 @@
       </h1>
 
       <!-- Subtitle (optional) -->
-      <h2 v-if="subtitle" :class="subtitleClass" class="mx-auto max-wh2xl text-center mb-10 md:mb-14">
+      <h2 v-if="subtitle" :class="subtitleClass" class="mx-auto max-w-2xl text-center mb-10 md:mb-14">
         {{ subtitle }}
       </h2>
 
       <!-- Content slot for custom HTML with rich formatting -->
-      <div class="mx-auto mt-10 md:mt-14 max-wh2xl text-[18px] leading-8 tracking-wide">
+      <div class="mx-auto mt-10 md:mt-14 max-w-2xl text-[18px] leading-8 tracking-wide">
         <slot />
       </div>
 
@@ -39,7 +41,9 @@
       <div v-if="showCTA" class="flex justify-start md:justify-center mt-10">
         <NuxtLink :to="ctaLink" class="inline-block">
           <button
-            class="uppercase tracking-[0.2em] text-gray-700 dark:text-gray-300 border-2 border-gray-600 dark:border-gray-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-md shadow-[0_3px_0_rgba(0,0,0,0.12)] hover:shadow-[0_6px_0_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_0_rgba(255,255,255,0.1)] transition-all bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
+            type="button"
+            class="uppercase tracking-[0.2em] text-gray-700 dark:text-gray-300 border-2 border-gray-600 dark:border-gray-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-md shadow-[0_3px_0_rgba(0,0,0,0.12)] hover:shadow-[0_6px_0_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_0_rgba(255,255,255,0.1)] transition-all bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+            :aria-label="`${ctaText} - En savoir plus`"
           >
             {{ ctaText }}
           </button>
@@ -50,90 +54,48 @@
   </main>
 </template>
 
-<script setup>
-// Define props with defaults
-const props = defineProps({
-  // Main title text
-  title: {
-    type: String,
-    required: true
-  },
+<script setup lang="ts">
+import type { PageTemplateProps } from '~/types'
 
-  // Title styling: 'handwritten' (Lazydog with shadow) or 'bold' (Garet Heavy) or 'custom'
-  titleStyle: {
-    type: String,
-    default: 'handwritten',
-    validator: (value) => ['handwritten', 'bold', 'custom'].includes(value)
-  },
-
-  // Subtitle text (optional)
-  subtitle: {
-    type: String,
-    default: ''
-  },
-
-  // Subtitle styling: 'handwritten' or 'normal' or 'custom'
-  subtitleStyle: {
-    type: String,
-    default: 'normal',
-    validator: (value) => ['handwritten', 'normal', 'custom'].includes(value)
-  },
-
-  // Show back button
-  showBackButton: {
-    type: Boolean,
-    default: false
-  },
-
-  // Back button text
-  backText: {
-    type: String,
-    default: 'Retour'
-  },
-
-  // Back button link
-  backLink: {
-    type: String,
-    default: '/'
-  },
-
-  // Show CTA button
-  showCTA: {
-    type: Boolean,
-    default: false
-  },
-
-  // CTA button text
-  ctaText: {
-    type: String,
-    default: 'En apprendre plus'
-  },
-
-  // CTA button link
-  ctaLink: {
-    type: String,
-    default: '#'
-  }
+// Define props with defaults and TypeScript types
+const props = withDefaults(defineProps<PageTemplateProps>(), {
+  titleStyle: 'handwritten',
+  subtitle: '',
+  subtitleStyle: 'normal',
+  showBackButton: false,
+  backText: 'Retour',
+  backLink: '/',
+  showCTA: false,
+  ctaText: 'En apprendre plus',
+  ctaLink: '#',
 })
 
 // Compute title classes based on style
 const titleClass = computed(() => {
-  if (props.titleStyle === 'handwritten') {
-    return 'title-handwritten text-[56px] md:text-[72px] font-black uppercase tracking-[.15em]'
-  } else if (props.titleStyle === 'bold') {
-    return 'title-bold text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wide'
+  switch (props.titleStyle) {
+    case 'handwritten':
+      return 'title-handwritten text-[56px] md:text-[72px] font-black uppercase tracking-[.15em]'
+    case 'bold':
+      return 'title-bold text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wide'
+    case 'custom':
+      return 'text-4xl md:text-6xl font-bold'
+    default:
+      return 'text-4xl md:text-6xl font-bold'
   }
-  return 'text-4xl md:text-6xl font-bold'
 })
 
 // Compute subtitle classes based on style
 const subtitleClass = computed(() => {
-  if (props.subtitleStyle === 'handwritten') {
-    return 'subtitle-handwritten text-3xl md:text-4xl lg:text-5xl font-normal'
-  } else if (props.subtitleStyle === 'normal') {
-    return 'text-xl md:text-2xl font-semibold leading-snug text-gray-600 dark:text-gray-400'
+  switch (props.subtitleStyle) {
+    case 'handwritten':
+      return 'subtitle-handwritten text-3xl md:text-4xl lg:text-5xl font-normal'
+    case 'normal':
+      return 'text-xl md:text-2xl font-semibold leading-snug text-gray-600 dark:text-gray-400'
+    case 'custom':
+      return 'text-xl md:text-2xl'
+    default:
+      return 'text-xl md:text-2xl'
   }
-  return 'text-xl md:text-2xl'
 })
 </script>
 
@@ -190,4 +152,6 @@ main {
   color: #E5E7EB;
 }
 </style>
+
+
 

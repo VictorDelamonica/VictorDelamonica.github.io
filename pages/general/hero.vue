@@ -31,19 +31,17 @@
   </PageTemplate>
 </template>
 
-<script setup>
-// Page metadata
-useHead({
-  title: 'IncluSens - Association pour la visibilité du handicap invisible',
-  meta: [
-    {
-      name: 'description',
-      content: '12 millions de personnes en France vivent avec un handicap invisible. IncluSens rend visibles ces réalités.'
-    }
-  ]
+<script setup lang="ts">
+// SEO metadata
+useSeo({
+  title: 'Accueil',
+  description:
+    '12 millions de personnes en France vivent avec un handicap invisible. IncluSens rend visibles ces réalités.',
 })
 
-// Use the default layout
-definePageMeta({ layout: 'default' })
+// Page metadata
+definePageMeta({
+  layout: 'default',
+})
 </script>
 

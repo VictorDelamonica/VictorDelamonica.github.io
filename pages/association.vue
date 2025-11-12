@@ -1,23 +1,55 @@
 <template>
   <main class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans">
-    <Default/>
     <div class="opacity-100 animate-fade-in-down">
-      <History/>
-      <Desk/>
-      <Missions/>
-      <Adhesion/>
-      <Helper/>
-      <Dons/>
+      <History />
+      <Desk />
+      <Missions />
+      <Adhesion />
+      <Helper />
+      <Dons />
     </div>
   </main>
 </template>
 
-<script setup>
-import Desk from "~/pages/association/desk.vue";
-import History from "~/pages/association/history.vue";
-import Default from "~/layouts/default.vue";
-import Missions from "~/pages/association/missions.vue";
-import Adhesion from "~/pages/association/adhesion.vue";
-import Helper from "~/pages/association/helper.vue";
-import Dons from "~/pages/association/dons.vue";
+<script setup lang="ts">
+// SEO metadata
+useHead({
+  title: 'Notre Association',
+  meta: [
+    {
+      name: 'description',
+      content: 'Découvrez l\'histoire d\'IncluSens, notre équipe, nos missions et comment nous rejoindre pour agir ensemble contre l\'exclusion liée au handicap invisible.',
+    },
+    {
+      property: 'og:title',
+      content: 'Notre Association - IncluSens',
+    },
+    {
+      property: 'og:description',
+      content: 'Découvrez l\'histoire d\'IncluSens et comment nous agissons pour la visibilité du handicap invisible.',
+    },
+  ],
+})
+
+definePageMeta({
+  layout: 'default',
+})
 </script>
+
+<style scoped>
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.6s ease-out;
+}
+</style>
+
