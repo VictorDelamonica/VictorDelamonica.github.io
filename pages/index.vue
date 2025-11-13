@@ -1,17 +1,148 @@
 <template>
-  <main class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans">
-    <div class="opacity-100 animate-fade-in-down">
-      <GeneralHero />
-      <GeneralExposition />
-      <GeneralTables />
-      <GeneralCircle />
-      <GeneralAlternative />
-      <GeneralApplication />
-    </div>
-  </main>
+  <div class="bg-[#eee3da] dark:bg-[#626c71] text-gray-900 dark:text-gray-100 font-sans">
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#eee3da] dark:bg-[#626c71] shadow-md border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between py-6">
+          <!-- Logo/Home Text -->
+          <div class="inline-flex items-center gap-2 flex-shrink-0">
+            <img
+              src="/logo.png"
+              alt="IncluSens Logo"
+              class="h-10 w-auto dark:hidden"
+            />
+            <img
+              src="/logo_dark.png"
+              alt="IncluSens Logo"
+              class="h-10 w-auto hidden dark:block"
+            />
+          </div>
+
+          <!-- Section Links -->
+          <ul class="flex overflow-x-auto scrollbar-hide space-x-2 md:space-x-4 flex-1 justify-center mx-4 py-2">
+            <li v-for="section in sections" :key="section.id">
+              <a
+                :href="`#${section.id}`"
+                @click.prevent="scrollToSection(section.id)"
+                class="whitespace-nowrap px-4 py-2 rounded-2xl text-xs md:text-base font-medium transition-all duration-300 hover:bg-[#F4A694] hover:text-white"
+                :class="activeSection === section.id ? 'bg-[#F4A694] text-white' : 'text-gray-700 dark:text-gray-300'"
+              >
+                {{ section.label }}
+              </a>
+            </li>
+          </ul>
+
+          <!-- Theme Toggle Button -->
+          <button
+            type="button"
+            @click="toggleColorMode"
+            class="inline-flex items-center gap-2 p-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#626c71] hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F4A694] focus:ring-offset-2 flex-shrink-0"
+            :aria-label="colorMode.value === 'light' ? 'Activer le mode sombre' : 'Activer le mode clair'"
+          >
+            <Transition name="icon-fade" mode="out-in">
+              <component
+                :is="colorMode.value === 'light' ? SunIcon : MoonIcon"
+                :key="colorMode.value"
+                class="w-5 h-5 text-yellow-500 dark:text-white transition-transform duration-500"
+              />
+            </Transition>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Add padding-top to account for fixed nav -->
+    <main class="pt-14">
+      <div class="opacity-100 animate-fade-in-down">
+        <section id="accueil">
+          <GeneralHero />
+        </section>
+        <section id="exposition">
+          <GeneralExposition />
+        </section>
+        <section id="tables">
+          <GeneralTables />
+        </section>
+        <section id="cercle">
+          <GeneralCircle />
+        </section>
+        <section id="alternative">
+          <GeneralAlternative />
+        </section>
+        <section id="application">
+          <GeneralApplication />
+        </section>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
+
+const colorMode = useColorMode()
+
+/**
+ * Toggle between light and dark color modes
+ */
+const toggleColorMode = (): void => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+// Navigation sections
+const sections = [
+  { id: 'accueil', label: 'Accueil' },
+  { id: 'exposition', label: 'Exposition' },
+  { id: 'tables', label: 'Tables Rondes' },
+  { id: 'cercle', label: 'Cercle de Parole' },
+  { id: 'alternative', label: 'Alternatives' },
+  { id: 'application', label: 'Application' },
+]
+
+const activeSection = ref('accueil')
+
+// Smooth scroll to section
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id)
+  if (element) {
+    const navHeight = 80 // Approximate height of sticky nav
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+    const offsetPosition = elementPosition - navHeight
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Update active section on scroll
+const updateActiveSection = () => {
+  const navHeight = 140
+  const scrollPosition = window.scrollY + navHeight
+
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const currentSection = sections[i]
+    if (!currentSection) continue
+
+    const section = document.getElementById(currentSection.id)
+    if (section && section.offsetTop <= scrollPosition) {
+      activeSection.value = currentSection.id
+      break
+    }
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveSection)
+  updateActiveSection() // Initial check
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateActiveSection)
+})
+
 // SEO metadata
 useHead({
   title: 'IncluSens - Association pour la visibilité du handicap invisible',
@@ -50,6 +181,32 @@ definePageMeta({
 
 .animate-fade-in-down {
   animation: fade-in-down 0.6s ease-out;
+}
+
+/* Hide scrollbar for navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Icon fade transition */
+.icon-fade-enter-active,
+.icon-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-fade-enter-from {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+}
+
+.icon-fade-leave-to {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.8);
 }
 </style>
 

@@ -11,7 +11,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "nuxt typecheck"
+    "type-check": "nuxt typecheck",
+    "pre-commit": "./scripts/pre-commit.sh"
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",

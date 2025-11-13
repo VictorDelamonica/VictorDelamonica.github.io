@@ -10,6 +10,8 @@
 
 ## Before Each Commit
 
+**Quick option:** Run `./scripts/pre-commit.sh` or `npm run pre-commit` to automate checks below.
+
 - [ ] Run `npm run lint` to check code quality
 - [ ] Run `npm run type-check` for TypeScript errors
 - [ ] Test the feature you're working on

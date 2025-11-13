@@ -36,8 +36,21 @@
             </li>
           </ul>
 
-          <!-- Spacer for balance -->
-          <div class="w-20 flex-shrink-0"></div>
+          <!-- Theme Toggle Button -->
+          <button
+            type="button"
+            @click="toggleColorMode"
+            class="inline-flex items-center gap-2 p-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F4A694] focus:ring-offset-2 flex-shrink-0"
+            :aria-label="colorMode.value === 'light' ? 'Activer le mode sombre' : 'Activer le mode clair'"
+          >
+            <Transition name="icon-fade" mode="out-in">
+              <component
+                :is="colorMode.value === 'light' ? SunIcon : MoonIcon"
+                :key="colorMode.value"
+                class="w-5 h-5 text-yellow-500 dark:text-white transition-transform duration-500"
+              />
+            </Transition>
+          </button>
         </div>
       </div>
     </nav>
@@ -70,6 +83,16 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
+
+const colorMode = useColorMode()
+
+/**
+ * Toggle between light and dark color modes
+ */
+const toggleColorMode = (): void => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 
 // Navigation sections
 const sections = [
@@ -173,6 +196,22 @@ definePageMeta({
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Icon fade transition */
+.icon-fade-enter-active,
+.icon-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-fade-enter-from {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+}
+
+.icon-fade-leave-to {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.8);
 }
 </style>
 
