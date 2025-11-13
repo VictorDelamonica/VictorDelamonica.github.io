@@ -1,10 +1,8 @@
 <template>
   <div class="bg-white dark:bg-gray-800 min-h-screen">
+    <NuxtLoadingIndicator color="#F4A694" :height="3" />
     <NuxtLayout>
-      <NuxtLoadingIndicator color="#F4A694" :height="3" />
-      <Transition name="page" mode="out-in">
-        <NuxtPage />
-      </Transition>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
@@ -22,6 +20,20 @@ useHead({
 </script>
 
 <style>
+/* Prevent horizontal overflow globally */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Global text wrapping */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Page transition animations */
 .page-enter-active,
 .page-leave-active {
@@ -47,6 +59,18 @@ html {
 *:focus-visible {
   outline: 2px solid #F4A694;
   outline-offset: 2px;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+    hyphens: auto;
+  }
 }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
-  <main class="min-h-screen bg-[#F7EDEA] dark:bg-gray-900 text-gray-700 dark:text-gray-300 font-sans transition-colors duration-300">
-    <section class="mx-auto w-full max-w-5xl px-6 pt-10 pb-20 md:pt-14">
+  <main class="min-h-screen bg-[#F7EDEA] dark:bg-gray-900 text-gray-700 dark:text-gray-300 font-sans transition-colors duration-300 overflow-x-hidden">
+    <section class="mx-auto w-full max-w-5xl px-4 sm:px-6 pt-10 pb-20 md:pt-14">
 
       <!-- Back Button (optional) -->
       <nav v-if="showBackButton" class="mb-6" aria-label="Breadcrumb">
@@ -23,17 +23,17 @@
       </nav>
 
       <!-- Title -->
-      <h1 :class="titleClass" class="text-center mb-2 select-none">
+      <h1 :class="titleClass" class="text-center mb-2 select-none break-words px-2">
         {{ title }}
       </h1>
 
       <!-- Subtitle (optional) -->
-      <h2 v-if="subtitle" :class="subtitleClass" class="mx-auto max-w-2xl text-center mb-10 md:mb-14">
+      <h2 v-if="subtitle" :class="subtitleClass" class="mx-auto max-w-2xl text-center mb-10 md:mb-14 break-words px-2">
         {{ subtitle }}
       </h2>
 
       <!-- Content slot for custom HTML with rich formatting -->
-      <div class="mx-auto mt-10 md:mt-14 max-w-2xl text-[18px] leading-8 tracking-wide">
+      <div class="mx-auto mt-10 md:mt-14 max-w-2xl text-base sm:text-[18px] leading-7 sm:leading-8 tracking-wide break-words">
         <slot />
       </div>
 
@@ -74,13 +74,13 @@ const props = withDefaults(defineProps<PageTemplateProps>(), {
 const titleClass = computed(() => {
   switch (props.titleStyle) {
     case 'handwritten':
-      return 'title-handwritten text-[56px] md:text-[72px] font-black uppercase tracking-[.15em]'
+      return 'title-handwritten text-[40px] sm:text-[56px] md:text-[72px] font-black uppercase tracking-[.1em] sm:tracking-[.15em]'
     case 'bold':
-      return 'title-bold text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wide'
+      return 'title-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wide'
     case 'custom':
-      return 'text-4xl md:text-6xl font-bold'
+      return 'text-3xl sm:text-4xl md:text-6xl font-bold'
     default:
-      return 'text-4xl md:text-6xl font-bold'
+      return 'text-3xl sm:text-4xl md:text-6xl font-bold'
   }
 })
 
@@ -88,13 +88,13 @@ const titleClass = computed(() => {
 const subtitleClass = computed(() => {
   switch (props.subtitleStyle) {
     case 'handwritten':
-      return 'subtitle-handwritten text-3xl md:text-4xl lg:text-5xl font-normal'
+      return 'subtitle-handwritten text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal'
     case 'normal':
-      return 'text-xl md:text-2xl font-semibold leading-snug text-gray-600 dark:text-gray-400'
+      return 'text-lg sm:text-xl md:text-2xl font-semibold leading-snug text-gray-600 dark:text-gray-400'
     case 'custom':
-      return 'text-xl md:text-2xl'
+      return 'text-lg sm:text-xl md:text-2xl'
     default:
-      return 'text-xl md:text-2xl'
+      return 'text-lg sm:text-xl md:text-2xl'
   }
 })
 </script>
@@ -105,7 +105,16 @@ const subtitleClass = computed(() => {
   font-family: 'Inclusive Sans', cursive;
   color: #F4A694;
   font-weight: bold;
-  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (min-width: 768px) {
+  .title-handwritten {
+    text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  }
 }
 
 :global(.dark) .title-handwritten {
@@ -113,20 +122,30 @@ const subtitleClass = computed(() => {
   color: #F4A694;
 }
 
-
 /* Bold title with Garet Heavy */
 .title-bold {
   font-family: 'Inclusive Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   font-weight: 900;
   color: #F4A694;
   letter-spacing: 0.05em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Handwritten subtitle with Lazydog font */
 .subtitle-handwritten {
   font-family: 'Inclusive Sans', cursive;
   color: #8B7B8B;
-  text-shadow: 3px 3px 0 rgba(244, 166, 148, 0.3);
+  text-shadow: 2px 2px 0 rgba(244, 166, 148, 0.3);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (min-width: 768px) {
+  .subtitle-handwritten {
+    text-shadow: 3px 3px 0 rgba(244, 166, 148, 0.3);
+  }
 }
 
 :global(.dark) .subtitle-handwritten {
@@ -137,15 +156,21 @@ const subtitleClass = computed(() => {
 main {
   line-height: 1.75;
   font-family: 'Inclusive Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Style for content paragraphs */
 :slotted(p) {
   margin-bottom: 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 :slotted(strong) {
   font-weight: 900;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 :global(.dark) :slotted(strong) {

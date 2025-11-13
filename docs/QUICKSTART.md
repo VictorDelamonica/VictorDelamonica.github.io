@@ -207,10 +207,10 @@ npm run postinstall
 
 ## Resources
 
-- 📖 [Full Documentation](./README.md)
-- 🏗️ [Architecture Guide](./ARCHITECTURE.md)
-- 🤝 [Contributing](./CONTRIBUTING.md)
-- ⚡ [Performance Guide](./PERFORMANCE.md)
+- 📖 [Full Documentation](../README.md)
+- 🏗️ [Architecture Guide](ARCHITECTURE.md)
+- 🤝 [Contributing](CONTRIBUTING.md)
+- ⚡ [Performance Guide](PERFORMANCE.md)
 
 ## Need Help?
 

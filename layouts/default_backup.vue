@@ -1,5 +1,5 @@
 <template>
-  <div class="relative min-h-screen">
+  <div class="relative">
     <!-- Light/Dark Toggle -->
     <button
       type="button"
@@ -63,8 +63,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.icon-fade-enter-active,
-.icon-fade-leave-active {
+.icon-fade-enter-active, .icon-fade-leave-active {
   transition: opacity 0.3s, transform 0.4s;
 }
 
@@ -87,5 +86,19 @@ onMounted(() => {
 .fade-leave-to {
   opacity: 0;
 }
-</style>
 
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1s linear infinite;
+}
+
+</style>

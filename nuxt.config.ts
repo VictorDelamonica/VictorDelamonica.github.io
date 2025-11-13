@@ -1,17 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-04-14',
+  compatibilityDate: '2024-11-01',
 
   // Development tools
   devtools: { enabled: true },
 
-  // Auto-import components
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false,
-    },
-  ],
+  // Development server configuration
+  devServer: {
+    port: 3000,
+  },
+
+
+  // Auto-import components (default Nuxt behavior)
+  components: true,
 
   // Modules
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@nuxtjs/mdc'],
@@ -27,6 +28,18 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'github_pages',
     compressPublicAssets: true,
+  },
+
+  // Security headers
+  routeRules: {
+    '/**': {
+      headers: {
+        'X-Frame-Options': 'SAMEORIGIN',
+        'X-Content-Type-Options': 'nosniff',
+        'X-XSS-Protection': '1; mode=block',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+      },
+    },
   },
 
   // Disable SSR for static site generation
@@ -92,6 +105,11 @@ export default defineNuxtConfig({
 
   // Vite configuration
   vite: {
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
     build: {
       cssCodeSplit: true,
       rollupOptions: {
@@ -101,6 +119,10 @@ export default defineNuxtConfig({
           },
         },
       },
+    },
+    // Define to avoid eval in production
+    define: {
+      __VUE_PROD_DEVTOOLS__: false,
     },
   },
 })

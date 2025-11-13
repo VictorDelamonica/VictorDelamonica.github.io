@@ -1,12 +1,12 @@
 <template>
   <main class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans">
     <div class="opacity-100 animate-fade-in-down">
-      <Hero />
-      <Exposition />
-      <Tables />
-      <Circle />
-      <Alternative />
-      <Application />
+      <GeneralHero />
+      <GeneralExposition />
+      <GeneralTables />
+      <GeneralCircle />
+      <GeneralAlternative />
+      <GeneralApplication />
     </div>
   </main>
 </template>

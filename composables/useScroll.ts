@@ -1,6 +1,7 @@
 /**
  * Composable for smooth scrolling to elements or positions
  */
+import {process} from "std-env";
 export const useScroll = () => {
   /**
    * Scroll to a specific element by selector
@@ -41,7 +42,7 @@ export const useScroll = () => {
   /**
    * Check if an element is in viewport
    * @param selector - CSS selector of the element to check
-   * @returns Boolean indicating if element is in viewport
+   * @returns Boolean indicating if an element is in viewport
    */
   const isInViewport = (selector: string): boolean => {
     if (!process.client) return false
