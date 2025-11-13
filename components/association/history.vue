@@ -5,9 +5,7 @@
       title-style="handwritten"
       subtitle="Notre Histoire"
       subtitle-style="handwritten"
-      :show-back-button="true"
-      back-link="/"
-      back-text="Retour"
+      :show-back-button="false"
   >
     <MDC :value="content" tag="div" />
   </PageTemplate>

@@ -1,17 +1,129 @@
 <template>
-  <main class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans">
-    <div class="opacity-100 animate-fade-in-down">
-      <AssociationHistory />
-      <AssociationDesk />
-      <AssociationMissions />
-      <AssociationAdhesion />
-      <AssociationHelper />
-      <AssociationDons />
-    </div>
-  </main>
+  <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-sans">
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between py-6">
+          <!-- Back Button -->
+          <NuxtLink
+            to="/"
+            class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-[#F4A694] dark:hover:text-[#F4A694] transition-colors duration-200 group flex-shrink-0"
+            aria-label="Retour vers la page d'accueil"
+          >
+            <svg
+              class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span class="font-medium hidden sm:inline">Retour</span>
+          </NuxtLink>
+
+          <!-- Section Links -->
+          <ul class="flex overflow-x-auto scrollbar-hide space-x-2 md:space-x-4 flex-1 justify-center mx-4 py-2">
+            <li v-for="section in sections" :key="section.id">
+              <a
+                :href="`#${section.id}`"
+                @click.prevent="scrollToSection(section.id)"
+                class="whitespace-nowrap px-4 py-2 rounded-2xl text-xs md:text-base font-medium transition-all duration-300 hover:bg-[#F4A694] hover:text-white"
+                :class="activeSection === section.id ? 'bg-[#F4A694] text-white' : 'text-gray-700 dark:text-gray-300'"
+              >
+                {{ section.label }}
+              </a>
+            </li>
+          </ul>
+
+          <!-- Spacer for balance -->
+          <div class="w-20 flex-shrink-0"></div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Add padding-top to account for fixed nav -->
+    <main class="pt-14">
+      <div class="opacity-100 animate-fade-in-down">
+        <section id="histoire">
+          <AssociationHistory />
+        </section>
+        <section id="bureau">
+          <AssociationDesk />
+        </section>
+        <section id="missions">
+          <AssociationMissions />
+        </section>
+        <section id="adhesion">
+          <AssociationAdhesion />
+        </section>
+        <section id="benevoles">
+          <AssociationHelper />
+        </section>
+        <section id="dons">
+          <AssociationDons />
+        </section>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
+// Navigation sections
+const sections = [
+  { id: 'histoire', label: 'Notre Histoire' },
+  { id: 'bureau', label: 'Le Bureau' },
+  { id: 'missions', label: 'Nos Missions' },
+  { id: 'adhesion', label: 'Adhésion' },
+  { id: 'benevoles', label: 'Bénévoles' },
+  { id: 'dons', label: 'Faire un Don' },
+]
+
+const activeSection = ref('histoire')
+
+// Smooth scroll to section
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id)
+  if (element) {
+    const navHeight = 80 // Approximate height of sticky nav
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+    const offsetPosition = elementPosition - navHeight
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Update active section on scroll
+const updateActiveSection = () => {
+  const navHeight = 140
+  const scrollPosition = window.scrollY + navHeight
+
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const currentSection = sections[i]
+    if (!currentSection) continue
+
+    const section = document.getElementById(currentSection.id)
+    if (section && section.offsetTop <= scrollPosition) {
+      activeSection.value = currentSection.id
+      break
+    }
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveSection)
+  updateActiveSection() // Initial check
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateActiveSection)
+})
+
 // SEO metadata
 
 useHead({
@@ -51,6 +163,16 @@ definePageMeta({
 
 .animate-fade-in-down {
   animation: fade-in-down 0.6s ease-out;
+}
+
+/* Hide scrollbar for navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 </style>
 
