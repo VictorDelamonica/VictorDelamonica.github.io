@@ -1,11 +1,12 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 min-h-screen">
+  <div class="bg-[#F7EDEA] dark:bg-gray-800 min-h-screen">
     <NuxtLoadingIndicator color="#F4A694" :height="3" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+
 
 <script setup lang="ts">
 // Dynamic favicon based on color mode

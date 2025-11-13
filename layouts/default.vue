@@ -1,20 +1,5 @@
 <template>
   <div class="relative min-h-screen">
-    <!-- Light/Dark Toggle -->
-    <button
-      type="button"
-      @click="toggleColorMode"
-      class="fixed top-4 right-4 z-50 p-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
-      :aria-label="colorMode.value === 'light' ? 'Activer le mode sombre' : 'Activer le mode clair'"
-    >
-      <Transition name="icon-fade" mode="out-in">
-        <component
-          :is="colorMode.value === 'light' ? SunIcon : MoonIcon"
-          :key="colorMode.value"
-          class="w-5 h-5 text-yellow-500 dark:text-white transition-transform duration-500 transform rotate-0 scale-100"
-        />
-      </Transition>
-    </button>
 
     <!-- Loading Spinner -->
     <Transition name="fade">
@@ -32,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { SunIcon, MoonIcon } from '@heroicons/vue/24/solid'
 
 const isLoading = ref(false)
 const router = useRouter()
