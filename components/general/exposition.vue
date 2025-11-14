@@ -4,7 +4,10 @@
     title-style="handwritten"
     subtitle="Le handicap invisible en entreprise"
     subtitle-style="handwritten"
-    :show-c-t-a="false"
+    bg-image="/bg/exposition.png"
+    cta-text="Soutenir l'exposition • Au-delà des apparences"
+    cta-link="https://www.helloasso.com/associations/inclusens/collectes/exposition-au-dela-des-apparences"
+    :show-c-t-a="true"
   >
     <p>
       Notre exposition met en lumière les
@@ -25,10 +28,6 @@
       <strong>invite à changer de regard, à mieux comprendre ces réalités</strong>
       et à ouvrir la voie vers un monde du travail plus inclusif.
     </p>
-
-    <div class="mt-16 text-center text-gray-600 dark:text-gray-400">
-      <p>Pour accueillir notre exposition, n'hésitez pas à nous contacter : ...</p>
-    </div>
   </PageTemplate>
 </template>
 
@@ -39,7 +38,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Notre exposition met en lumière les parcours de personnes vivant avec un handicap invisible en entreprise.'
+      content: 'Notre bg met en lumière les parcours de personnes vivant avec un handicap invisible en entreprise.'
     }
   ]
 })

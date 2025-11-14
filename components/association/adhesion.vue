@@ -2,6 +2,9 @@
   <PageTemplate
       subtitle="Adhésion"
       subtitle-style="handwritten"
+      cta-text="Adhérer"
+      ctaLink="https://www.helloasso.com/associations/inclusens/adhesions/adhesion-a-inclusens?_gl=1%2auj9afu%2a_gcl_au%2aMTg2MTM0MTUzNC4xNzYzMTE3MDQ2"
+      :show-c-t-a="true"
   >
     <p>
       En rejoignant IncluSens, vous devenez acteur d’un projet collectif qui place l’inclusion et la solidarité au cœur de ses actions.
@@ -24,10 +27,6 @@
     </p>
 
     <MDC :value="content" tag="div" />
-
-    <p class="text-center">
-      (VOIR HELLO ASSO)
-    </p>
   </PageTemplate>
 </template>
 

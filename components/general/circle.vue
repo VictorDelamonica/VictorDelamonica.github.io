@@ -38,7 +38,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Notre exposition met en lumière les parcours de personnes vivant avec un handicap invisible en entreprise.'
+      content: 'Notre bg met en lumière les parcours de personnes vivant avec un handicap invisible en entreprise.'
     }
   ]
 })

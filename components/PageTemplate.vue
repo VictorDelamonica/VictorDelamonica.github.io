@@ -1,6 +1,12 @@
 <template>
-  <main class="min-h-screen bg-[#F7EDEA] dark:bg-gray-900 text-gray-700 dark:text-gray-300 font-sans transition-colors duration-300 overflow-x-hidden">
-    <section class="mx-auto w-full max-w-5xl px-4 sm:px-6 pt-10 pb-20 md:pt-14">
+  <main
+    class="min-h-screen bg-[#F7EDEA] dark:bg-gray-900 text-gray-700 dark:text-gray-300 font-sans transition-colors duration-300 overflow-x-hidden relative"
+    :style="mainBackgroundStyle"
+  >
+    <!-- Background Image Overlay (optional) -->
+    <div v-if="bgImage" class="absolute inset-0 bg-[#F7EDEA] dark:bg-gray-900" :style="{ opacity: 1 - (bgImageOpacity || 0.3) }"></div>
+
+    <section class="mx-auto w-full max-w-5xl px-4 sm:px-6 pt-10 pb-20 md:pt-14 relative z-10">
 
       <!-- Back Button (optional) -->
       <nav v-if="showBackButton" class="mb-6" aria-label="Breadcrumb">
@@ -68,6 +74,23 @@ const props = withDefaults(defineProps<PageTemplateProps>(), {
   showCTA: false,
   ctaText: 'En apprendre plus',
   ctaLink: '#',
+  bgImage: '',
+  bgImageOpacity: 0.3,
+  bgImagePosition: 'center',
+  bgImageSize: 'cover',
+})
+
+// Compute background style for main element
+const mainBackgroundStyle = computed(() => {
+  if (!props.bgImage) return {}
+
+  return {
+    backgroundImage: `url(${props.bgImage})`,
+    backgroundPosition: props.bgImagePosition,
+    backgroundSize: props.bgImageSize,
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+  }
 })
 
 // Compute title classes based on style
@@ -102,7 +125,7 @@ const subtitleClass = computed(() => {
 <style scoped>
 /* Handwritten title with Lazydog font and shadow */
 .title-handwritten {
-  font-family: 'Inclusive Sans', cursive;
+  font-family: 'Inclusive Sans', sans-serif;
   color: #F4A694;
   font-weight: bold;
   text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
@@ -118,7 +141,7 @@ const subtitleClass = computed(() => {
 }
 
 :global(.dark) .title-handwritten {
-  font-family: 'Inclusive Sans', cursive;
+  font-family: 'Inclusive Sans', sans-serif;
   color: #F4A694;
 }
 
@@ -134,7 +157,7 @@ const subtitleClass = computed(() => {
 
 /* Handwritten subtitle with Lazydog font */
 .subtitle-handwritten {
-  font-family: 'Inclusive Sans', cursive;
+  font-family: 'Inclusive Sans', sans-serif;
   color: #8B7B8B;
   text-shadow: 2px 2px 0 rgba(244, 166, 148, 0.3);
   word-wrap: break-word;

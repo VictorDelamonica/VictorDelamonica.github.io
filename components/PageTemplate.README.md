@@ -71,6 +71,28 @@ definePageMeta({ layout: 'default' })
 - Default: `'#'`
 - URL for the CTA button
 
+### `bgImage` (optional)
+- Type: `String`
+- Default: `''` (no background image)
+- URL path to a background image (e.g., `/my-background.jpg`)
+- When set, the image will be displayed as a fixed background
+
+### `bgImageOpacity`
+- Type: `Number`
+- Default: `0.3`
+- Controls the visibility of the background image (0 = invisible, 1 = fully visible)
+- A semi-transparent overlay is applied to ensure content readability
+
+### `bgImagePosition`
+- Type: `String`
+- Default: `'center'`
+- CSS background-position value (e.g., `'center'`, `'top'`, `'bottom'`, `'left center'`)
+
+### `bgImageSize`
+- Type: `String`
+- Default: `'cover'`
+- CSS background-size value (e.g., `'cover'`, `'contain'`, `'100% auto'`)
+
 ## Content Slot
 
 The component uses a default slot for page content. You can add:
@@ -127,7 +149,22 @@ See: `/pages/_example-bold.vue`
 </PageTemplate>
 ```
 
-### Example 4: Custom Styling
+### Example 4: With Background Image
+```vue
+<PageTemplate
+  title="Beautiful Page"
+  title-style="handwritten"
+  subtitle="With a stunning background"
+  bg-image="/my-background.jpg"
+  :bg-image-opacity="0.5"
+  bg-image-position="center"
+  bg-image-size="cover"
+>
+  <p>Content is displayed over the background image with an overlay for readability.</p>
+</PageTemplate>
+```
+
+### Example 5: Custom Styling
 ```vue
 <PageTemplate
   title="Custom Page"

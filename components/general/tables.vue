@@ -4,6 +4,7 @@
       title-style="handwritten"
       subtitle="Sensibilisation en entreprise"
       subtitle-style="handwritten"
+      bg-image="bg/tables.png"
       :show-c-t-a="false"
   >
     <p>

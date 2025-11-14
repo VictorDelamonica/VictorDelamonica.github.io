@@ -4,11 +4,11 @@
       subtitle-style="handwritten"
   >
     <MDC :value="content" tag="div" />
-    <p class="text-center">
-      <br/>
-      <strong>Comment nous rejoindre ?</strong>
-    </p>
-    <MDC :value="content1" tag="div" />
+<!--    <p class="text-center">-->
+<!--      <br/>-->
+<!--      <strong>Comment nous rejoindre ?</strong>-->
+<!--    </p>-->
+<!--    <MDC :value="content1" tag="div" />-->
   </PageTemplate>
 </template>
 
@@ -25,7 +25,7 @@ Peu importe le temps que vous pouvez consacrer, chaque contribution a un impact.
 `
 
 const content1 = `
-Contactez nous via notre **formulaire en ligne** ou venez nous rencontrer lors de nos événements. (VOIR HELLO ASSO)
+Contactez nous via notre **formulaire en ligne** ou venez nous rencontrer lors de nos événements.
 
 Nous serons ravies d’échanger avec vous et de vous accueillir dans notre équipe.
 `

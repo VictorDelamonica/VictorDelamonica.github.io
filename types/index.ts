@@ -22,6 +22,14 @@ export interface PageTemplateProps {
   ctaText?: string
   /** CTA button link */
   ctaLink?: string
+  /** Optional background image URL */
+  bgImage?: string
+  /** Background image opacity (0-1) */
+  bgImageOpacity?: number
+  /** Background image position */
+  bgImagePosition?: string
+  /** Background image size */
+  bgImageSize?: string
 }
 
 /**

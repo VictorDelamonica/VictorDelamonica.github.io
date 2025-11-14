@@ -2,15 +2,13 @@
   <PageTemplate
       subtitle="Dons"
       subtitle-style="handwritten"
+      cta-text="Faire un don"
+      cta-link="https://www.helloasso.com/associations/inclusens/formulaires/1"
+      :show-c-t-a="true"
   >
     <MDC :value="content" tag="div" />
     <br/>
     <MDC :value="content1" tag="div"/>
-    <p class="text-center">
-      <br/>
-      <strong>Comment nous rejoindre ?</strong>
-    </p>
-      <MDC :value="content2" tag="div" />
   </PageTemplate>
 </template>
 
@@ -27,12 +25,6 @@ Chaque euro récolté nous permet :
 `
 
 const content1 = `Le **don est libre**, chacun **participe selon ses moyens**, et **chaque contribution a un impact** réel.`
-
-const content2 = `
-Contactez nous via notre **formulaire en ligne** ou venez nous rencontrer lors de nos événements. (VOIR HELLO ASSO)
-
-Nous serons ravies d’échanger avec vous et de vous accueillir dans notre équipe.
-`
 // Use the default layout
 definePageMeta({layout: 'default'})
 </script>

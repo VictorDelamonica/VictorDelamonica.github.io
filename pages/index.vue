@@ -61,11 +61,11 @@
         <section id="exposition">
           <GeneralExposition />
         </section>
-        <section id="tables">
-          <GeneralTables />
-        </section>
         <section id="cercle">
           <GeneralCircle />
+        </section>
+        <section id="tables">
+          <GeneralTables />
         </section>
         <section id="alternative">
           <GeneralAlternative />
@@ -95,9 +95,9 @@ const toggleColorMode = (): void => {
 const sections = [
   { id: 'accueil', label: 'Accueil' },
   { id: 'exposition', label: 'Exposition' },
-  { id: 'tables', label: 'Tables Rondes' },
   { id: 'cercle', label: 'Cercle de Parole' },
-  { id: 'alternative', label: 'Alternatives' },
+  { id: 'tables', label: 'Tables Rondes' },
+  { id: 'alternative', label: 'Alternative' },
   { id: 'application', label: 'Application' },
 ]
 
