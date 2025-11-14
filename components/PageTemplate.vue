@@ -4,7 +4,7 @@
     :style="mainBackgroundStyle"
   >
     <!-- Background Image Overlay (optional) -->
-    <div v-if="bgImage" class="absolute inset-0 bg-[#F7EDEA] dark:bg-gray-900" :style="{ opacity: 1 - (bgImageOpacity || 0.3) }"></div>
+    <div v-if="bgImage" class="absolute inset-0 bg-[#F7EDEA] dark:bg-gray-900" :style="{ opacity: 1 - (bgImageOpacity || 0.2) }"></div>
 
     <section class="mx-auto w-full max-w-5xl px-4 sm:px-6 pt-10 pb-20 md:pt-14 relative z-10">
 
@@ -39,7 +39,10 @@
       </h2>
 
       <!-- Content slot for custom HTML with rich formatting -->
-      <div class="mx-auto mt-10 md:mt-14 max-w-2xl text-base sm:text-[18px] leading-7 sm:leading-8 tracking-wide break-words">
+      <div
+        class="mx-auto mt-10 md:mt-14 max-w-2xl text-base sm:text-[18px] leading-7 sm:leading-8 tracking-wide break-words"
+        :class="{ 'text-black dark:text-white': bgImage }"
+      >
         <slot />
       </div>
 
@@ -48,7 +51,12 @@
         <NuxtLink :to="ctaLink" class="inline-block">
           <button
             type="button"
-            class="uppercase tracking-[0.2em] text-gray-700 dark:text-gray-300 border-2 border-gray-600 dark:border-gray-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-md shadow-[0_3px_0_rgba(0,0,0,0.12)] hover:shadow-[0_6px_0_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_0_rgba(255,255,255,0.1)] transition-all bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+            :class="[
+              'uppercase tracking-[0.2em] border-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-md transition-all bg-transparent focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2',
+              bgImage
+                ? 'text-black border-black dark:text-white dark:border-white hover:bg-white hover:text-gray-900 dark:hover:text-black shadow-[0_3px_0_rgba(0,0,0,0.3)] dark:shadow-[0_3px_0_rgba(255,255,255,0.3)] hover:shadow-[0_6px_0_rgba(0,0,0,0.3)] dark:hover:shadow-[0_6px_0_rgba(255,255,255,0.3)]'
+                : 'text-gray-700 dark:text-gray-300 border-gray-600 dark:border-gray-500 shadow-[0_3px_0_rgba(0,0,0,0.12)] hover:shadow-[0_6px_0_rgba(0,0,0,0.12)] dark:hover:shadow-[0_6px_0_rgba(255,255,255,0.1)] hover:bg-gray-100 dark:hover:bg-gray-800'
+            ]"
             :aria-label="`${ctaText} - En savoir plus`"
           >
             {{ ctaText }}
@@ -75,7 +83,7 @@ const props = withDefaults(defineProps<PageTemplateProps>(), {
   ctaText: 'En apprendre plus',
   ctaLink: '#',
   bgImage: '',
-  bgImageOpacity: 0.3,
+  bgImageOpacity: 0.2,
   bgImagePosition: 'center',
   bgImageSize: 'cover',
 })
@@ -198,6 +206,15 @@ main {
 
 :global(.dark) :slotted(strong) {
   color: #E5E7EB;
+}
+
+/* White text for content when background image is present */
+.text-white :slotted(p),
+.text-white :slotted(strong),
+.text-white :slotted(span),
+.text-white :slotted(a),
+.text-white :slotted(li) {
+  color: white !important;
 }
 </style>
 
