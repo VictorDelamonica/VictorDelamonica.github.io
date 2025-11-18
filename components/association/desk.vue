@@ -35,7 +35,7 @@
           Yolène LEGRIS
         </h3>
         <p class="text-lg text-[#8B7B8B] dark:text-[#B8A8B8] font-medium">
-          Trésorierère
+          Trésorière
         </p>
       </div>
 

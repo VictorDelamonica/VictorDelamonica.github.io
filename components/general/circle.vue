@@ -1,6 +1,6 @@
 <template>
   <PageTemplate
-      title="Cercles de parole"
+      title="Cercle de parole"
       title-style="handwritten"
       subtitle=""
       subtitle-style="handwritten"
@@ -12,7 +12,7 @@
 
     <p>
       Ces
-      <strong>d’rencontres réunissent des patients, leurs aidants et des patients experts formés </strong>, dans un
+      <strong>rencontres réunissent des patients, leurs aidants et des patients experts formés </strong>, dans un
       <strong>cadre bienveillant et sécurisant</strong>.
       Chacun peut y
       <strong>exprimer son vécu, partager ses difficultés mais aussi ses réussites</strong>, et trouver une
