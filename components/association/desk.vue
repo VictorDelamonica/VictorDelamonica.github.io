@@ -83,3 +83,5 @@ p {
   transform: scale(1.1);
 }
 </style>
+
+<!--Onboarding summary atelier-->
