@@ -77,6 +77,9 @@
         <section id="dons">
           <AssociationDons />
         </section>
+        <section id="mentions-legales">
+          <AssociationMentionsLegales />
+        </section>
       </div>
     </main>
   </div>
@@ -103,6 +106,7 @@ const sections = [
   { id: 'adhesion', label: 'Adhésion' },
   { id: 'benevoles', label: 'Bénévoles' },
   { id: 'dons', label: 'Faire un Don' },
+  { id: 'mentions-legales', label: 'Mentions légales' },
 ]
 
 const activeSection = ref('histoire')
