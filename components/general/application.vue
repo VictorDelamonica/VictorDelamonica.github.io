@@ -15,7 +15,7 @@
       <strong> approfondir ses connaissances </strong>
       sur le handicap, retrouver des
       <strong> conseils pratiques </strong>
-      et bénéficier d’
+      et bénéficier
       <strong> d’outils concrets pour mieux vivre </strong>
       au quotidien.
     </p>
